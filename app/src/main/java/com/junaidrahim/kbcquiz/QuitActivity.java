@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.service.voice.VoiceInteractionSession;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -101,9 +102,9 @@ public class QuitActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             if(response.getBoolean("success"))
-                                Toast.makeText(QuitActivity.this, "Successfully Logged Out", Toast.LENGTH_SHORT);
+                                Toast.makeText(QuitActivity.this, "Successfully Logged Out", Toast.LENGTH_SHORT).show();
                             else
-                                Toast.makeText(QuitActivity.this, "Some error occurred. Please Restart the app", Toast.LENGTH_SHORT);
+                                Toast.makeText(QuitActivity.this, "Some error occurred. Please Restart the app", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -113,11 +114,23 @@ public class QuitActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(QuitActivity.this, error.getMessage(), Toast.LENGTH_SHORT);
+                        Log.d("Error","Error " + error.getMessage());
+
                     }
                 }
         );
 
         requestQueue.add(delete_post_request);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Toast.makeText(QuitActivity.this, "Successfully Logged Out", Toast.LENGTH_SHORT).show();
+        send_delete_registration_post_request();
+
+        Intent main_activity_intent = new Intent(QuitActivity.this, MainActivity.class);
+        startActivity(main_activity_intent);
+        moveTaskToBack(true);
     }
 }

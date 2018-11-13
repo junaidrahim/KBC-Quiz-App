@@ -37,6 +37,7 @@ public class GameActivity extends AppCompatActivity {
 
     int timer_time = 30;
     int wrongs = 0;
+    int q = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +48,13 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private int randomNumber(){
-        Random random = new Random();
-
-        return random.nextInt(30); // that bound is no of questions - 1
-    }
 
     private void start_questions(final int i) {
-        Typeface varela = Typeface.createFromAsset(getAssets(),"Fonts/VarelaRound-Regular.ttf");
-
+        Typeface varela = Typeface.createFromAsset(getAssets(),"Fonts/VarelaRound-Regular.ttf");    
         TextView question_textview = (TextView) findViewById(R.id.question_text);
         question_textview.setTypeface(varela);
-
+        
+        q++;
 
         Questions question_generator = new Questions();
         String[] question_data = question_generator.get_easy_question(i);
@@ -88,9 +84,8 @@ public class GameActivity extends AppCompatActivity {
 
                      if(timer_time == 0){
                          timer.cancel();
-
                          send_result_post_request(0);
-                         start_questions(randomNumber());
+                         start_questions(q);
                      }
                  }
              });
@@ -114,18 +109,17 @@ public class GameActivity extends AppCompatActivity {
                 if(alphabets[position].equals(correct_answer)) {
                     toast_message("Correct, +4");
                     send_result_post_request(4);
-                    start_questions(randomNumber());
+                    start_questions(q);
                 }
                 else {
-                    wrongs++;
                     toast_message("Wrong, 0");
                     send_result_post_request(0);
-                    start_questions(randomNumber());
+                    start_questions(q);
                 }
             }
         });
 
-        if(wrongs==5){
+        if(q==39){
             timer.cancel();
             Intent home_activity_intent = new Intent(GameActivity.this, QuitActivity.class);
             startActivity(home_activity_intent);
@@ -138,11 +132,51 @@ public class GameActivity extends AppCompatActivity {
         Toast.makeText(GameActivity.this,message,Toast.LENGTH_SHORT).show();
     }
 
+    private void send_delete_registration_post_request(){
+        HashMap<String,String> request_params = new HashMap<String,String>();
+        request_params.put("name",getSharedPreferences("USER_NAME",MODE_PRIVATE).getString("user_name","test"));
+        request_params.put("id",getSharedPreferences("USER_REGISTRATION_ID",MODE_PRIVATE).getString("user_registration_id","0000"));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        String ip = getSharedPreferences("IP_ADDRESS",MODE_PRIVATE).getString("ip_address","192.168.0.106");
+        final String url = "http://" + ip + ":8000/api/post/delete_registration";
+
+
+        JsonObjectRequest delete_post_request = new JsonObjectRequest(url, new JSONObject(request_params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(response.getBoolean("success"))
+                                Toast.makeText(GameActivity.this, "Successfully Logged Out", Toast.LENGTH_SHORT);
+                            else
+                                Toast.makeText(GameActivity.this, "Some error occurred. Please Restart the app", Toast.LENGTH_SHORT);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(GameActivity.this, error.getMessage(), Toast.LENGTH_SHORT);
+                    }
+                }
+        );
+
+        requestQueue.add(delete_post_request);
+    }
+
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        moveTaskToBack(true); // TODO make sure the user cant exit just like that
+        send_delete_registration_post_request();
+        Intent main_activity_intent = new Intent(GameActivity.this,MainActivity.class);
+        startActivity(main_activity_intent);
+        Toast.makeText(GameActivity.this, "Successfully logged out", Toast.LENGTH_SHORT).show();
     }
 
     private void send_result_post_request(int score){
@@ -193,8 +227,7 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // report the error
-                        Log.w("Error",error.getMessage());
-                        toast_message(error.getMessage());
+                        Log.w("Error","Error occured ->" + error.getMessage());
                     }
                 }
         );

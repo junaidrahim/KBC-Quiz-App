@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         final String name_text = name_input_text.getText().toString();
         String age_text = age_input_text.getText().toString();
 
-        final String ip_address = "192.168.0.104";
+        final String ip_address = "142.93.213.48"; // main ip
 
         if(name_text.equals("") || name_text.equals(" ") || age_text.equals("") || age_text.equals(" "))
             Toast.makeText(MainActivity.this,"Please enter all your details",Toast.LENGTH_SHORT).show();
@@ -102,12 +102,12 @@ public class MainActivity extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.w("Error",error.getMessage());
-                            Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.w("Error","Error" + error.getMessage());
                         }
                     }
             );
 
+            Toast.makeText(MainActivity.this,"Registering...",Toast.LENGTH_SHORT).show();
             requestQueue.add(registration_post_request);
 
         }
