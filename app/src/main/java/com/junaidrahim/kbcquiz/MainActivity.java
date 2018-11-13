@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                                     // and moving to the next activity
                                     String user_registration_id = response.getString("id");
                                     getSharedPreferences("USER_REGISTRATION_ID",MODE_PRIVATE).edit().putString("user_registration_id",user_registration_id).commit();
+                                    Toast.makeText(MainActivity.this,"Registered Successfully",Toast.LENGTH_SHORT).show();
 
                                     Intent HomeActivityIntent = new Intent(MainActivity.this, HomeActivity.class);
                                     startActivity(HomeActivityIntent);
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(MainActivity.this,"Error: " + error.getMessage(),Toast.LENGTH_SHORT).show();
                             Log.w("Error","Error" + error.getMessage());
                         }
                     }

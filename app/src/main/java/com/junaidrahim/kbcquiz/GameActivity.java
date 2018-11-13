@@ -57,8 +57,17 @@ public class GameActivity extends AppCompatActivity {
         q++;
 
         Questions question_generator = new Questions();
-        String[] question_data = question_generator.get_easy_question(i);
+        String age = getSharedPreferences("USER_AGE",MODE_PRIVATE).getString("user_age","10");
+        int Age = Integer.parseInt(age);
 
+        String[] question_data;
+
+        if(Age<=10) {
+            question_data = question_generator.get_easy_question(i);
+        }
+        else {
+            question_data = question_generator.get_hard_question(i);
+        }
 
         String question_text = question_data[0];
         String[] options_array = {question_data[1],question_data[2],question_data[3],question_data[4]};
@@ -112,6 +121,7 @@ public class GameActivity extends AppCompatActivity {
                     start_questions(q);
                 }
                 else {
+                    wrongs++;
                     toast_message("Wrong, 0");
                     send_result_post_request(0);
                     start_questions(q);
@@ -121,8 +131,8 @@ public class GameActivity extends AppCompatActivity {
 
         if(q==39){
             timer.cancel();
-            Intent home_activity_intent = new Intent(GameActivity.this, QuitActivity.class);
-            startActivity(home_activity_intent);
+            Intent quit_activity_intent = new Intent(GameActivity.this, QuitActivity.class);
+            startActivity(quit_activity_intent);
         }
 
     }

@@ -53,7 +53,7 @@ public class Questions {
     public String[] get_hard_question(int x){
         ArrayList<String[]> q = new ArrayList<String[]>();
         // 40 questions
-        q.add(new String[]{"This mega metropolis in the east of the country and home of Mother Teresa for many years","Cochin","Kolkata","Banglore","Chennai","B"});
+        q.add(new String[]{"This metropolis is in the east and home of Mother Teresa","Cochin","Kolkata","Banglore","Chennai","B"});
         q.add(new String[]{"In which city is Red Fort Located ?","Mumbai","Agra","Delhi","Hyderabad","C"});
         q.add(new String[]{"What is the capital of Madhya Pradesh and the site of an ecological disaster in 1984?","Mumbai","Bhopal","Indore","Jabalpur","B"});
         q.add(new String[]{"What is the capital of Mizoram ?","Lunglei","Champhai","Aizwal","Vairengte","C"});
@@ -78,7 +78,7 @@ public class Questions {
         q.add(new String[]{"Who is the founder of TATA Industries Limited ?","Ratan Tata","Noel Tata","Sir Dorab Tata","Jamsetji Tata","D"});
         q.add(new String[]{"Who is the founder of Amazon ?","Satya Nadella","Jeff Bezos","Larry Ellison","James Gosling","B"});
         q.add(new String[]{"The first version of Android was launched in the year ?","2006","2007","2010","2008","D"});
-        q.add(new String[]{"The Indian Government demonetized all the 500 and 1000 Rs notes on which date of 2014","6th October","17th December","8th November","14th November","C"});
+        q.add(new String[]{"Demonetization happened on which date of 2016","6th October","17th December","8th November","14th November","C"});
         q.add(new String[]{"Under which taluka does Virar lie ?","Agashi","Thane","Palghar","Vasai","D"});
         q.add(new String[]{"Who wrote Julius Caesar, Macbeth and Hamlet?","William Shakespeare","Aristotle","Plato","Grace Kelly","A"});
         q.add(new String[]{"In Mahabharata, The Great Was lasted for how many days ?","16","17","18","19","C"});
