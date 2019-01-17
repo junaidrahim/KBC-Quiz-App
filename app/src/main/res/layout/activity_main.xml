@@ -7,12 +7,31 @@
     tools:context=".MainActivity">
 
     <EditText
+        android:id="@+id/ip_input_text"
+        android:layout_width="294dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="128dp"
+        android:ems="10"
+        android:hint="IP without the port no."
+        android:inputType="text"
+        android:textAlignment="textStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColorLink="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_input_text" />
+
+    <EditText
         android:id="@+id/age_input_text"
         android:layout_width="294dp"
         android:layout_height="52dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="How old are you ?"
         android:inputType="number"
@@ -21,6 +40,7 @@
         android:textColorLink="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_input_text" />
 
@@ -62,16 +82,15 @@
         android:layout_height="75dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="48dp"
         android:background="#0091ea"
+        android:onClick="register_user"
         android:text="Join The Game !"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:onClick="register_user"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/age_input_text" />
+        app:layout_constraintTop_toBottomOf="@+id/ip_input_text" />
 
 </android.support.constraint.ConstraintLayout>

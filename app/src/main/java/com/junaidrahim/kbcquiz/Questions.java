@@ -3,7 +3,7 @@ package com.junaidrahim.kbcquiz;
 import java.util.ArrayList;
 
 public class Questions {
-    public String[] get_easy_question(int x){
+    public String[] get_easy_question(int x){ // For children age < 10
         ArrayList<String[]> q = new ArrayList<String[]>();
         // 40 questions
         q.add(new String[]{"Which is the National Bird of India ?","Crow","Sparrow","Peacock","Pigeon","C"});
@@ -50,7 +50,7 @@ public class Questions {
         return q.get(x);
     }
 
-    public String[] get_hard_question(int x){
+    public String[] get_hard_question(int x){ // for children age > 10
         ArrayList<String[]> q = new ArrayList<String[]>();
         // 40 questions
         q.add(new String[]{"This metropolis is in the east and home of Mother Teresa","Cochin","Kolkata","Banglore","Chennai","B"});

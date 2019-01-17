@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         EditText age_input_text = (EditText) findViewById(R.id.age_input_text);
         age_input_text.setTypeface(varela);
 
+        EditText ip_input_text = (EditText) findViewById(R.id.ip_input_text);
+        ip_input_text.setTypeface(varela);
+
         Button join_game_button = (Button) findViewById(R.id.join_game_button);
         join_game_button.setTypeface(gotham);
 
@@ -49,11 +52,13 @@ public class MainActivity extends AppCompatActivity {
     public void register_user(View view) {
         EditText name_input_text = (EditText) findViewById(R.id.name_input_text);
         EditText age_input_text = (EditText) findViewById(R.id.age_input_text);
+        EditText ip_input_text = (EditText) findViewById(R.id.ip_input_text);
 
+        // Getting all input data
         final String name_text = name_input_text.getText().toString();
         String age_text = age_input_text.getText().toString();
+        final String ip_address = ip_input_text.getText().toString(); // main ip
 
-        final String ip_address = "142.93.213.48"; // main ip
 
         if(name_text.equals("") || name_text.equals(" ") || age_text.equals("") || age_text.equals(" "))
             Toast.makeText(MainActivity.this,"Please enter all your details",Toast.LENGTH_SHORT).show();
